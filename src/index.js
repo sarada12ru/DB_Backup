@@ -2,6 +2,7 @@ import { DB_CONFIG, MAIL_CONFIG, ENV } from "./config.js";
 import { createBackup } from "./backup.js";
 import { sendMail } from "./mailer.js";
 import cron from "node-cron";
+import express from "express";
 
 async function run() {
   try {
@@ -23,6 +24,17 @@ async function run() {
     console.error("❌ Error:", err.message);
   }
 }
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("MySQL Backup Service is running.");
+});
+
+const PORT = process.env.PORT || 5652;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
 
 cron.schedule("0 0 * * *", () => {
   run();
