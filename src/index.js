@@ -1,7 +1,7 @@
 import { DB_CONFIG, MAIL_CONFIG, ENV } from "./config.js";
 import { createBackup } from "./backup.js";
 import { sendMail } from "./mailer.js";
-import cron from "node-cron";
+import schedule from "node-schedule";
 import express from "express";
 
 async function run() {
@@ -36,6 +36,6 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
-cron.schedule("0 0 * * *", () => {
+schedule.scheduleJob("0 0 * * *", () => {
   run();
 });
