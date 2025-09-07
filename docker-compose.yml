@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  app:
+    image: node:18
+    working_dir: /usr/src/app
+    volumes:
+      - ./:/usr/src/app
+      - dump-data:/usr/src/app/dump
+    command: ["npm", "start"]
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+
+volumes:
+  dump-data:
