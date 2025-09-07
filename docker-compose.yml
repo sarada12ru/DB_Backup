@@ -5,7 +5,6 @@ services:
     volumes:
       - ./:/usr/src/app
       - dump-data:/usr/src/app/dump
-    command: ["npm", "start"]
     ports:
       - "3000:3000"
     env_file:
